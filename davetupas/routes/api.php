@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\MaterialController;
@@ -17,11 +18,17 @@ use App\Http\Controllers\PaymentController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('/register', [AuthenticationController::class, 'register']);
-Route::post('/login', [AuthenticationController::class, 'login']);
+    Route::post('/register', [AuthenticationController::class, 'register']);
+    Route::post('/login', [AuthenticationController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
+    Route::get('/get-users', [UserController::class, 'getUsers']);
+    Route::post('/add-user', [UserController::class, 'addUser']);
+    Route::put('/edit-user/{id}', [UserController::class, 'editUser']);
+    Route::delete('/delete-user/{id}', [UserController::class, 'deleteUser']);
+
 
 
 Route::get('/clients', [ClientController::class, 'getClients']);
@@ -46,5 +53,5 @@ Route::get('/payments', [PaymentController::class, 'getPayments']);
 Route::post('/payments', [PaymentController::class, 'addPayment']);
 Route::put('/payments/{id}', [PaymentController::class, 'editPayment']);
 Route::delete('/payments/{id}', [PaymentController::class, 'deletePayment']);
-
+   Route::post('/logout', [AuthenticationController::class, 'logout']);
 });
