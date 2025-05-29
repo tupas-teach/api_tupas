@@ -53,5 +53,6 @@ Route::get('/payments', [PaymentController::class, 'getPayments']);
 Route::post('/payments', [PaymentController::class, 'addPayment']);
 Route::put('/payments/{id}', [PaymentController::class, 'editPayment']);
 Route::delete('/payments/{id}', [PaymentController::class, 'deletePayment']);
+
    Route::post('/logout', [AuthenticationController::class, 'logout']);
 });
